@@ -38,26 +38,33 @@ export class BuildTokensUseCase {
     StyleDictionary.registerFormat({
       name: 'json/values-only',
       format: ({ dictionary }) => {
-        function extractValues(obj: TokenNode): TokenValue | Record<string, unknown> {
-          if ('$value' in obj && typeof obj.$value !== 'undefined') {
-            return obj.$value;
-          }
-
-          const result: Record<string, unknown> = {};
-
+        function flatten(obj: TokenNode, prefix = '', result: Record<string, unknown> = {}) {
           for (const key in obj) {
-            if (key === '$value') continue;
-            const val = obj[key];
-            if (typeof val === 'object' && val !== null) {
-              result[key] = extractValues(val as TokenNode);
+            const value = obj[key];
+            const newKey = prefix ? `${prefix}${capitalizeFirst(key)}` : key;
+
+            if (typeof value === 'object' && value !== null && 'value' in value) {
+              result[newKey] = parseValue(value.value as TokenValue);
+            } else if (typeof value === 'object' && value !== null) {
+              flatten(value, newKey, result);
             }
           }
-
           return result;
         }
 
-        const valuesOnly = extractValues(dictionary.tokens);
-        return JSON.stringify(valuesOnly, null, 2);
+        function capitalizeFirst(str: string) {
+          return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function parseValue(value: TokenValue) {
+          if (typeof value === 'string' && !isNaN(Number(value))) {
+            return Number(value);
+          }
+          return value;
+        }
+
+        const flatValues = flatten(dictionary.tokens);
+        return JSON.stringify(flatValues, null, 2);
       },
     });
   }

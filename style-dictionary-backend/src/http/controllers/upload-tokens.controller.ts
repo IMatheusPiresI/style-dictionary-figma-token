@@ -3,6 +3,7 @@ import z from 'zod';
 import { BuildTokensUseCase } from '../../use-cases/build-tokens-use-case';
 import { UploadTokensForS3UseCase } from '../../use-cases/upload-tokens-for-s3';
 import { s3 } from '../../lib/s3';
+import { ConvertFigmaTokensToDictionaryFormatUseCase } from '../../use-cases/convert-figma-tokens-to-dictionary-format';
 
 export async function uploadTokensController(request: FastifyRequest, reply: FastifyReply) {
   const WEB_TOKEN_PATH = './src/style-dictionary/config/config.web.json';
@@ -15,7 +16,10 @@ export async function uploadTokensController(request: FastifyRequest, reply: Fas
   try {
     const buildTokensUseCase = new BuildTokensUseCase(WEB_TOKEN_PATH, MOBILE_TOKEN_PATH);
     const uploadTokensForS3UseCase = new UploadTokensForS3UseCase(s3);
+    const convertFigmaTokensToDictionaryFormatUseCase =
+      new ConvertFigmaTokensToDictionaryFormatUseCase();
 
+    await convertFigmaTokensToDictionaryFormatUseCase.execute();
     await buildTokensUseCase.execute();
 
     await uploadTokensForS3UseCase.execute({

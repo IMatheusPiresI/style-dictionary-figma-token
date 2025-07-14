@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -30,10 +30,13 @@ function App() {
 
   return (
     <>
-      <div className="bg-primary">
+      <div className="bg-brand-primary-50">
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
+        <div className="bg-color-primary-900 p-4">
+        Testando cor primária 900 com variável CSS
+      </div>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>

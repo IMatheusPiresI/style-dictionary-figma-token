@@ -1,5 +1,5 @@
 {
-  "source": ["src/style-dictionary/tokens/**/*.json"],
+  "source": ["src/style-dictionary/tokens/figma-tokens-formatted.json"],
   "platforms": {
     "web": {
       "transformGroup": "custom/js",

@@ -1,5 +1,5 @@
 {
-  "source": ["src/style-dictionary/tokens/**/*.json"],
+  "source": ["src/style-dictionary/tokens/figma-tokens-formatted.json"],
   "platforms": {
     "mobile": {
       "transformGroup": "custom/js",
@@ -9,7 +9,10 @@
           "destination": "tokens.json",
           "format": "json/values-only"
         }
-      ]
+      ],
+      "options": {
+        "resolveReferences": false
+      }
     }
   }
 }
