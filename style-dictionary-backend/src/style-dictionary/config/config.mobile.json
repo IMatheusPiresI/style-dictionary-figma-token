@@ -1,0 +1,15 @@
+{
+  "source": ["src/style-dictionary/tokens/**/*.json"],
+  "platforms": {
+    "mobile": {
+      "transformGroup": "custom/js",
+      "buildPath": "dist/mobile/",
+      "files": [
+        {
+          "destination": "tokens.json",
+          "format": "json/values-only"
+        }
+      ]
+    }
+  }
+}

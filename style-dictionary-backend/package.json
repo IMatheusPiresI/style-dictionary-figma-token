@@ -1,0 +1,40 @@
+{
+  "name": "style-dictionary-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src/server.ts --format esm,cjs --dts --out-dir dist",
+    "start": "node dist/server.js",
+    "lint": "eslint './src/**/*.{ts,tsx,js}'",
+    "lint:fix": "eslint './src/**/*.{ts,tsx,js}' --fix",
+    "format": "prettier --write './src/**/*.{ts,tsx,js,json,md}'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.844.0",
+    "@aws-sdk/s3-request-presigner": "^3.844.0",
+    "@fastify/cors": "^11.0.1",
+    "@fastify/static": "^8.2.0",
+    "dotenv": "^17.2.0",
+    "fastify": "^5.4.0",
+    "style-dictionary": "^5.0.1",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/node": "^24.0.13",
+    "@typescript-eslint/eslint-plugin": "^8.36.0",
+    "@typescript-eslint/parser": "^8.36.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
